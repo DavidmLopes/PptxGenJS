@@ -1,4 +1,4 @@
-/* PptxGenJS 4.0.1 @ 2025-08-09T14:48:25.758Z */
+/* PptxGenJS 4.1.0.beta.0 @ 2025-08-09T18:38:17.505Z */
 import JSZip from 'jszip';
 
 /******************************************************************************
@@ -3581,12 +3581,11 @@ function makeXmlCharts(rel) {
  * @param {IChartOptsLib} opts chart options
  * @param {string} valAxisId chart val axis id
  * @param {string} catAxisId chart cat axis id
- * @param {boolean} isMultiTypeChart is this a mutli-type chart?
  * @example 'bubble' returns <c:bubbleChart></c>
  * @example '<c:lineChart>'
  * @return {string} XML chart
  */
-function makeChartType(chartType, data, opts, valAxisId, catAxisId, isMultiTypeChart) {
+function makeChartType(chartType, data, opts, valAxisId, catAxisId) {
     // NOTE: "Chart Range" (as shown in "select Chart Area dialog") is calculated.
     // ....: Ensure each X/Y Axis/Col has same row height (esp. applicable to XY Scatter where X can often be larger than Y's)
     let colorIndex = -1; // Maintain the color index by region
@@ -6433,7 +6432,7 @@ function makeXmlApp(slides, company) {
 			${slides.map((_slideObj, idx) => `<vt:lpstr>Slide ${idx + 1}</vt:lpstr>`).join('')}
 		</vt:vector>
 	</TitlesOfParts>
-	<Company>${company}</Company>
+	<Company>${encodeXmlEntities(company)}</Company>
 	<LinksUpToDate>false</LinksUpToDate>
 	<SharedDoc>false</SharedDoc>
 	<HyperlinksChanged>false</HyperlinksChanged>
@@ -6787,7 +6786,7 @@ function makeXmlViewProps() {
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-const VERSION = '4.0.1-pr1404-08090947';
+const VERSION = '4.1.0-WIP-1337';
 class PptxGenJS {
     set layout(value) {
         const newLayout = this.LAYOUTS[value];
