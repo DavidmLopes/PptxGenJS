@@ -122,5 +122,5 @@ gulp.task('default',
 
 // Watch
 exports.default = function() {
-	watch('src/*.ts', series('build', 'min', 'cjs', 'es', 'bundle', 'nodeTest'))
+	watch('src/*.ts', series('build', 'min', 'cjs', 'es', 'bundle', 'nodeTestCjs', 'nodeTestEs'))
 }
