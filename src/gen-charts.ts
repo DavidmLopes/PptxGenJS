@@ -885,7 +885,6 @@ function makeChartType (chartType: CHART_NAME, data: IOptsChartData[], opts: ICh
 					strXml += `<a:latin typeface="${opts.dataLabelFontFace || 'Arial'}"/>`
 					strXml += '</a:defRPr></a:pPr></a:p></c:txPr>'
 					if (opts.dataLabelPosition) strXml += `<c:dLblPos val="${opts.dataLabelPosition}"/>`
-					else strXml += '<c:dLblPos val="ctr"/>'
 					strXml += '<c:showLegendKey val="0"/>'
 					strXml += `<c:showVal val="${opts.showValue ? '1' : '0'}"/>`
 					strXml += `<c:showCatName val="0"/><c:showSerName val="${opts.showSerName ? '1' : '0'}"/><c:showPercent val="0"/><c:showBubbleSize val="0"/>`
