@@ -1,4 +1,4 @@
-/* PptxGenJS 4.1.0.beta.0 @ 2025-08-09T18:38:17.505Z */
+/* PptxGenJS 4.1.0.beta.0 @ 2025-08-09T19:47:57.848Z */
 import JSZip from 'jszip';
 
 /******************************************************************************
@@ -3700,6 +3700,8 @@ function makeChartType(chartType, data, opts, valAxisId, catAxisId) {
                     strXml += '</a:defRPr></a:pPr></a:p></c:txPr>';
                     if (opts.dataLabelPosition)
                         strXml += `<c:dLblPos val="${opts.dataLabelPosition}"/>`;
+                    else
+                        strXml += '<c:dLblPos val="ctr"/>';
                     strXml += '<c:showLegendKey val="0"/>';
                     strXml += `<c:showVal val="${opts.showValue ? '1' : '0'}"/>`;
                     strXml += `<c:showCatName val="0"/><c:showSerName val="${opts.showSerName ? '1' : '0'}"/><c:showPercent val="0"/><c:showBubbleSize val="0"/>`;
@@ -5636,9 +5638,10 @@ function slideObjectToXml(slide) {
             case SLIDE_OBJECT_TYPES.chart:
                 strSlideXml += '<p:graphicFrame>';
                 strSlideXml += ' <p:nvGraphicFramePr>';
-                strSlideXml += `   <p:cNvPr id="${idx + 2}" name="${slideItemObj.options.objectName}" descr="${encodeXmlEntities(slideItemObj.options.altText || '')}"/>`;
+                strSlideXml += `   <p:cNvPr id="${idx + 2}" name="${slideItemObj.options.objectName}"/>`;
                 strSlideXml += '   <p:cNvGraphicFramePr/>';
-                strSlideXml += `   <p:nvPr>${genXmlPlaceholder(placeholderObj)}</p:nvPr>`;
+                //strSlideXml += `   <p:nvPr>${genXmlPlaceholder(placeholderObj)}</p:nvPr>`
+                strSlideXml += '<p:nvPr/>';
                 strSlideXml += ' </p:nvGraphicFramePr>';
                 strSlideXml += ` <p:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${cx}" cy="${cy}"/></p:xfrm>`;
                 strSlideXml += ' <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">';
@@ -6786,7 +6789,7 @@ function makeXmlViewProps() {
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-const VERSION = '4.1.0-WIP-1337';
+const VERSION = '4.1.0-WIP-1411';
 class PptxGenJS {
     set layout(value) {
         const newLayout = this.LAYOUTS[value];

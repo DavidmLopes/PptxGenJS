@@ -676,9 +676,10 @@ function slideObjectToXml (slide: PresSlide | SlideLayout): string {
 			case SLIDE_OBJECT_TYPES.chart:
 				strSlideXml += '<p:graphicFrame>'
 				strSlideXml += ' <p:nvGraphicFramePr>'
-				strSlideXml += `   <p:cNvPr id="${idx + 2}" name="${slideItemObj.options.objectName}" descr="${encodeXmlEntities(slideItemObj.options.altText || '')}"/>`
+				strSlideXml += `   <p:cNvPr id="${idx + 2}" name="${slideItemObj.options.objectName}"/>`
 				strSlideXml += '   <p:cNvGraphicFramePr/>'
-				strSlideXml += `   <p:nvPr>${genXmlPlaceholder(placeholderObj)}</p:nvPr>`
+				//strSlideXml += `   <p:nvPr>${genXmlPlaceholder(placeholderObj)}</p:nvPr>`
+				strSlideXml += '<p:nvPr/>'
 				strSlideXml += ' </p:nvGraphicFramePr>'
 				strSlideXml += ` <p:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${cx}" cy="${cy}"/></p:xfrm>`
 				strSlideXml += ' <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
