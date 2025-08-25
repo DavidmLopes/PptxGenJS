@@ -68,6 +68,7 @@ export function createSlideMaster(props: SlideMasterProps, target: SlideLayout):
 		props.objects.forEach((object, idx) => {
 			const key = Object.keys(object)[0]
 			const tgt = target as PresSlide
+			tgt.isLayout = true
 			if (MASTER_OBJECTS[key] && key === 'chart') addChartDefinition(tgt, object[key].type, object[key].data, object[key].opts)
 			else if (MASTER_OBJECTS[key] && key === 'image') addImageDefinition(tgt, object[key])
 			else if (MASTER_OBJECTS[key] && key === 'line') addShapeDefinition(tgt, SHAPE_TYPE.LINE, object[key])
@@ -472,7 +473,7 @@ export function addImageDefinition(target: PresSlide, opt: ImageProps): void {
 			extn: 'png',
 			data: strImageData || '',
 			rId: imageRelId,
-			Target: `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.png`,
+			Target: `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.png`,
 			isSvgPng: true,
 			svgSize: { w: getSmartParseNumber(newObject.options.w, 'X', target._presLayout), h: getSmartParseNumber(newObject.options.h, 'Y', target._presLayout) },
 		})
@@ -483,7 +484,7 @@ export function addImageDefinition(target: PresSlide, opt: ImageProps): void {
 			extn: strImgExtn,
 			data: strImageData || '',
 			rId: imageRelId + 1,
-			Target: `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
+			Target: `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
 		})
 		newObject.imageRid = imageRelId + 1
 	} else {
@@ -497,7 +498,7 @@ export function addImageDefinition(target: PresSlide, opt: ImageProps): void {
 			data: strImageData || '',
 			rId: imageRelId,
 			isDuplicate: !!(dupeItem?.Target),
-			Target: dupeItem?.Target ? dupeItem.Target : `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
+			Target: dupeItem?.Target ? dupeItem.Target : `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
 		})
 		newObject.imageRid = imageRelId
 	}

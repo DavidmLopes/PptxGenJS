@@ -752,7 +752,7 @@ export default class PptxGenJS implements IPresentationProps {
 			_relsChart: [],
 			_relsMedia: [],
 			_slide: null,
-			_slideNum: 1000 + this.slideLayouts.length + 1,
+			_slideNum: this.slideLayouts.length + 1,
 			_slideNumberProps: propsClone.slideNumber || null,
 			_slideObjects: [],
 			background: propsClone.background || null,

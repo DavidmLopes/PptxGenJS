@@ -1841,6 +1841,8 @@ export interface PresSlide extends SlideBaseProps {
 	 * Slide number options
 	 */
 	slideNumber?: SlideNumberProps
+
+	isLayout?: boolean
 }
 export interface AddSlideProps {
 	masterName?: string // TODO: 20200528: rename to "masterTitle" (createMaster uses `title` so lets be consistent)
