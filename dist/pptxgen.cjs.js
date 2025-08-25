@@ -1,4 +1,4 @@
-/* PptxGenJS 4.0.1 @ 2025-06-25T23:35:35.096Z */
+/* PptxGenJS 4.0.1 @ 2025-08-25T18:41:23.457Z */
 'use strict';
 
 var JSZip = require('jszip');
@@ -1587,6 +1587,7 @@ function createSlideMaster(props, target) {
         props.objects.forEach((object, idx) => {
             const key = Object.keys(object)[0];
             const tgt = target;
+            tgt.isLayout = true;
             if (MASTER_OBJECTS[key] && key === 'chart')
                 addChartDefinition(tgt, object[key].type, object[key].data, object[key].opts);
             else if (MASTER_OBJECTS[key] && key === 'image')
@@ -2006,7 +2007,7 @@ function addImageDefinition(target, opt) {
             extn: 'png',
             data: strImageData || '',
             rId: imageRelId,
-            Target: `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.png`,
+            Target: `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.png`,
             isSvgPng: true,
             svgSize: { w: getSmartParseNumber(newObject.options.w, 'X', target._presLayout), h: getSmartParseNumber(newObject.options.h, 'Y', target._presLayout) },
         });
@@ -2017,7 +2018,7 @@ function addImageDefinition(target, opt) {
             extn: strImgExtn,
             data: strImageData || '',
             rId: imageRelId + 1,
-            Target: `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
+            Target: `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
         });
         newObject.imageRid = imageRelId + 1;
     }
@@ -2031,7 +2032,7 @@ function addImageDefinition(target, opt) {
             data: strImageData || '',
             rId: imageRelId,
             isDuplicate: !!(dupeItem === null || dupeItem === void 0 ? void 0 : dupeItem.Target),
-            Target: (dupeItem === null || dupeItem === void 0 ? void 0 : dupeItem.Target) ? dupeItem.Target : `../media/image-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
+            Target: (dupeItem === null || dupeItem === void 0 ? void 0 : dupeItem.Target) ? dupeItem.Target : `../media/${target.isLayout ? 'layout-image' : 'image'}-${target._slideNum}-${target._relsMedia.length + 1}.${strImgExtn}`,
         });
         newObject.imageRid = imageRelId;
     }
@@ -7338,7 +7339,7 @@ class PptxGenJS {
             _relsChart: [],
             _relsMedia: [],
             _slide: null,
-            _slideNum: 1000 + this.slideLayouts.length + 1,
+            _slideNum: this.slideLayouts.length + 1,
             _slideNumberProps: propsClone.slideNumber || null,
             _slideObjects: [],
             background: propsClone.background || null,
